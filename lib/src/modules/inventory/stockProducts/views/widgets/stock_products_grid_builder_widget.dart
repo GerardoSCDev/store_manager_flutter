@@ -11,7 +11,7 @@ class StockProductsGridBuilderWidget extends StatelessWidget {
         crossAxisCount: 2,
         crossAxisSpacing: 8,
         mainAxisSpacing: 8,
-        childAspectRatio: 1 / 1.5,
+        childAspectRatio: 1 / 1.7,
       ),
       itemCount: 3,
       itemBuilder: (BuildContext context, int index) {

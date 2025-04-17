@@ -14,6 +14,12 @@ class AddProductsAppBarWidget extends StatelessWidget
       title: Text("Nuevos productos", style: TextStyle(color: Colors.white)),
       backgroundColor: Colors.blueGrey,
       leading: BackButton(color: Colors.white),
+      actions: [
+        TextButton(
+          onPressed: () {},
+          child: Text("Guardar", style: TextStyle(color: Colors.white)),
+        ),
+      ],
     );
   }
 }

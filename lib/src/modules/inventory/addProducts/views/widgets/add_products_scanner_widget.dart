@@ -7,13 +7,9 @@ class AddProductsScannerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.blue, width: 2),
-        borderRadius: BorderRadius.circular(12),
-      ),
+      height: 200,
+      decoration: BoxDecoration(),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(12),
         child: MobileScanner(
           fit: BoxFit.cover,
           onDetect: (capture) {
