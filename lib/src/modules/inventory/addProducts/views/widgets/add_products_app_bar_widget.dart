@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:store_manager/src/modules/inventory/formProducts/router/form_products_router.dart';
 
 class AddProductsAppBarWidget extends StatelessWidget
     implements PreferredSizeWidget {
@@ -16,7 +17,9 @@ class AddProductsAppBarWidget extends StatelessWidget
       leading: BackButton(color: Colors.white),
       actions: [
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            FormProductsRouter.showBottomSheet(context);
+          },
           child: Text("Guardar", style: TextStyle(color: Colors.white)),
         ),
       ],
