@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../presenter/add_products_presenter.dart';
 import 'add_products_item_widget.dart';
 
 class AddProductExpansionPanelWidget extends StatefulWidget {
-  const AddProductExpansionPanelWidget({super.key});
+  final TypeInputProduct typeProduct;
+  const AddProductExpansionPanelWidget({super.key, required this.typeProduct});
 
   @override
   State<AddProductExpansionPanelWidget> createState() =>
@@ -13,6 +16,13 @@ class AddProductExpansionPanelWidget extends StatefulWidget {
 class _AddProductExpansionPanelWidget
     extends State<AddProductExpansionPanelWidget> {
   bool _isExpandedWidget = true;
+  late TypeInputProduct productType;
+
+  @override
+  void initState() {
+    super.initState();
+    productType = widget.typeProduct;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +30,11 @@ class _AddProductExpansionPanelWidget
   }
 
   Widget _buildSimplePanel() {
+    final presenter = Provider.of<AddProductsPresenter>(context, listen: false);
+    final getProducts =
+        productType == TypeInputProduct.newProduct
+            ? presenter.newProducts
+            : presenter.updateProducts;
     return ExpansionPanelList(
       expansionCallback: (panelIndex, isExpanded) {
         setState(() {
@@ -29,7 +44,9 @@ class _AddProductExpansionPanelWidget
       children: [
         ExpansionPanel(
           headerBuilder: (BuildContext context, bool isExpanded) {
-            return ListTile(title: Text("Nuevos productos 40"));
+            return ListTile(
+              title: Text("Nuevos productos ${getProducts.length}"),
+            );
           },
           body: Container(
             constraints: BoxConstraints(
@@ -40,11 +57,10 @@ class _AddProductExpansionPanelWidget
             ),
             child: SingleChildScrollView(
               child: Column(
-                children: [
-                  AddProductsItemWidget(),
-                  AddProductsItemWidget(),
-                  AddProductsItemWidget(),
-                ],
+                children:
+                    getProducts.map((product) {
+                      return AddProductsItemWidget(product: product);
+                    }).toList(),
               ),
             ),
           ),
@@ -54,3 +70,5 @@ class _AddProductExpansionPanelWidget
     );
   }
 }
+
+enum TypeInputProduct { updateProduct, newProduct }

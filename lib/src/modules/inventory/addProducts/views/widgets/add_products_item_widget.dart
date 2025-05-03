@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:store_manager/db/entities/product.dart';
 
 class AddProductsItemWidget extends StatelessWidget {
-  const AddProductsItemWidget({super.key});
+  final Product product;
+
+  const AddProductsItemWidget({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +25,9 @@ class AddProductsItemWidget extends StatelessWidget {
               Expanded(
                 child: Column(
                   children: [
-                    Text("Television Samsum 25 pulgadas"),
-                    Text("Agregados: 20"),
+                    Text(product.name),
+                    Text(product.quantity.toString()),
+                    Text(product.sku),
                   ],
                 ),
               ),
