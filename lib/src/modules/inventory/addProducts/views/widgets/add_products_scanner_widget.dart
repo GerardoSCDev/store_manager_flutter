@@ -23,8 +23,8 @@ class AddProductsScannerWidget extends StatelessWidget {
             final List<Barcode> barcodes = capture.barcodes;
             for (final barcode in barcodes) {
               presenter.scanController.stop();
-              FormProductsRouter.showBottomSheet(context);
               presenter.addProduct(barcode.rawValue ?? "");
+              FormProductsRouter.showBottomSheet(context, presenter);
             }
           },
         ),

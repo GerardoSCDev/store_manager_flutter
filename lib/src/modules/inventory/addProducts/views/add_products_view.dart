@@ -25,19 +25,21 @@ class _AddProductsViewState extends State<AddProductsView>
     presenter = AddProductsPresenter(view: this);
   }
 
-  Widget _listProducts() {
+  Widget _listProducts(BuildContext context) {
+    final presenter = Provider.of<AddProductsPresenter>(context, listen: false);
     return Column(
       children: [
-        AddProductExpansionPanelWidget(
-          typeProduct: TypeInputProduct.newProduct,
-        ),
+        presenter.newProducts.isEmpty
+            ? Container()
+            : AddProductExpansionPanelWidget(
+              typeProduct: TypeInputProduct.newProduct,
+            ),
 
-        /// New Products
-        AddProductExpansionPanelWidget(
-          typeProduct: TypeInputProduct.updateProduct,
-        ),
-
-        /// Update Products
+        presenter.updateProducts.isEmpty
+            ? Container()
+            : AddProductExpansionPanelWidget(
+              typeProduct: TypeInputProduct.updateProduct,
+            ),
       ],
     );
   }
@@ -71,7 +73,7 @@ class _AddProductsViewState extends State<AddProductsView>
                             presenter.updateProducts.isEmpty;
                         return (isEmptyProducts)
                             ? AddProductsEmptyListWidget()
-                            : _listProducts();
+                            : _listProducts(context);
                       },
                     ),
                   ),

@@ -69,7 +69,12 @@ class FormProductsView extends StatelessWidget {
             padding: EdgeInsets.only(bottom: 20, left: 30, right: 30),
             child: SizedBox(
               width: double.infinity,
-              child: ElevatedButton(onPressed: () {}, child: Text("Agregar")),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("Agregar"),
+              ),
             ),
           ),
         ],
